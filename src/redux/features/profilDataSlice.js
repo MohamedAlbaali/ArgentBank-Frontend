@@ -24,7 +24,13 @@ const initialState = {
 export const profilDataSlice = createSlice({
   name: "profilData",
   initialState,
-  reducers: {},
+  reducers: {
+    updateUsernameLocally: (state, action) => {
+      if (state.data.body) {
+        state.data.body.userName = action.payload;
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getProfilData.pending, (state) => {
@@ -34,12 +40,13 @@ export const profilDataSlice = createSlice({
         state.loading = false;
         state.data = action.payload;
       })
-      .addCase(getProfilData.rejected, (state, action) => {
+      .addCase(getProfilData.rejected, (state) => {
         state.loading = false;
         state.error = "An error occurred while fetching data.";
       });
   },
 });
 
+export const { updateUsernameLocally } = profilDataSlice.actions;
 export const { SaveDataProfil } = profilDataSlice.actions;
 export default profilDataSlice.reducer;
