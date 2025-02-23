@@ -46,15 +46,21 @@ function Edit() {
   }
 
   return (
-    <section>
-      <h1>Edit user info</h1>
-      <div>
-        <label htmlFor="username">User name</label>
-        <input value={newUsername} onChange={handleUsernameChange} type="text" name="username" id="username"/>
-        <label htmlFor="firstname">First name</label>
-        <input value={firstName} type="text" name="firstname" id="firstname" disabled />
-        <label htmlFor="lastname">Last name</label>
-        <input value={lastName} type="text" name="lastname" id="lastname" disabled />
+    <section className="edit">
+      <h2>Edit user info</h2>
+      <div className="edit-inputs">
+        <div>
+          <label htmlFor="username">User name:</label>
+          <input value={newUsername} onChange={handleUsernameChange} type="text" name="username" id="username"/>
+        </div>
+        <div>
+          <label htmlFor="firstname">First name:</label>
+          <input value={firstName} type="text" name="firstname" id="firstname" disabled />
+        </div>
+        <div>
+          <label htmlFor="lastname">Last name:</label>
+          <input value={lastName} type="text" name="lastname" id="lastname" disabled />
+        </div>
       </div>
       <div>
         <button onClick={() => {editUsrName(token);}} type="submit" className="edit-button">

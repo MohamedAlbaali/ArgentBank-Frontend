@@ -16,12 +16,12 @@ function IsLoggedHeadre(){
     };
     if(isLoged){
         return(
-            <div>
+            <div className='loggoutHeadre'>
                 <Link to={'/user'} className="main-nav-item">
                     <i className="fa fa-user-circle"></i>
                     {userName}
                 </Link>
-                <button onClick={handleLogout} className="main-nav-item">
+                <button onClick={handleLogout} className="btn">
                     <i className="fa fa-sign-out"></i>
                     Sign Out
                 </button>

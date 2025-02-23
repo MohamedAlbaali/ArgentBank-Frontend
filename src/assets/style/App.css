@@ -6,7 +6,7 @@ html {
     color: #2c3e50;
   }
   
-  body {
+  body, #root {
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -20,7 +20,19 @@ html {
   .bg-dark {
     background-color: #12002b;
   }
-  
+  .loggoutHeadre{
+    display: flex;
+  }
+  .btn{
+    border: none;
+    background: none;
+    font-weight: bold;
+    color: #2c3e50;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    cursor: pointer;
+  }
   .sr-only {
     border: 0 !important;
     clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
@@ -45,6 +57,9 @@ html {
   .main-nav a {
     font-weight: bold;
     color: #2c3e50;
+    display: flex;
+    gap: 5px;
+    align-items: center;
   }
   
   .main-nav a.router-link-exact-active {
@@ -99,7 +114,23 @@ html {
     margin-bottom: 0;
     font-size: 0.9rem;
   }
-  
+  .edit{
+    width: 40%;
+    margin: 10px auto;
+    color: #fff;
+  }
+  .edit-inputs{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+  }
+  .edit-inputs div{
+    margin: 5px;
+  }
+  .edit-inputs label{
+    font-size: 14px;
+    margin-right: 10px;
+  }
   @media (min-width: 920px) {
     .hero {
       height: 400px;
@@ -174,9 +205,9 @@ html {
     padding: 2rem;
   }
   
-  .sign-in-icon {
+  /* .sign-in-icon {
     font-size: 5rem;
-  }
+  } */
   
   .input-remember {
     display: flex;
