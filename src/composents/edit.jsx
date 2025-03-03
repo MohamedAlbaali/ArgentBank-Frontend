@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { HandelCancelEdit } from "../redux/features/editSlice";
 import { useState } from "react";
 import { updateUsernameLocally, getProfilData } from "../redux/features/profilDataSlice";
 
-function Edit() {
+function Edit({closeForm}) {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const firstName = useSelector((state) => state.profilData.data.body?.firstName || "");
@@ -20,7 +19,10 @@ function Edit() {
       alert("Authorization token is missing!");
       return;
     }
-
+    if(newUsername == ''){
+      alert("User name est vide");
+      return;
+    }
     const response = await fetch("http://localhost:3001/api/v1/user/profile", {
       method: "PUT",
       headers: {
@@ -66,12 +68,11 @@ function Edit() {
         <button onClick={() => {editUsrName(token);}} type="submit" className="edit-button">
           Save
         </button>
-        <button onClick={() => dispatch(HandelCancelEdit())} className="edit-button">
+        <button onClick={() => closeForm(false)} className="edit-button">
           Cancel
         </button>
       </div>
     </section>
   );
 }
-
 export default Edit;

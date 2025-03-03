@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import '../assets/style/header.css'
-import logo from '../assets/img/argentBankLogo.png'
+import logo from '../assets/img/argentBankLogo.webp'
 import IsLoggedHeadre from './loggedHeader'
 function Header() {
     return (

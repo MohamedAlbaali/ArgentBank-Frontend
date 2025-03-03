@@ -1,0 +1,111 @@
+openapi: 3.0.0
+info:
+  title: Transactions API
+  description: API pour la gestion des transactions dans le dashboard (Phase 2)
+  version: 1.0.0
+servers:
+  - url: https://api.argentbank.com
+    description: Production Server
+paths:
+  /transactions:
+    get:
+      summary: Récupérer toutes les transactions du mois en cours
+      description: Retourne la liste des transactions de l'utilisateur pour le mois actuel, groupées par compte.
+      parameters:
+        - name: accountId
+          in: query
+          required: false
+          description: ID du compte pour filtrer les transactions
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Liste des transactions retournée avec succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+        "401":
+          description: Utilisateur non authentifié
+        "500":
+          description: Erreur serveur interne
+  /transactions/{id}:
+    get:
+      summary: Récupérer les détails d'une transaction
+      description: Retourne les détails d'une transaction spécifique.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la transaction
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Détails de la transaction retournés avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        "404":
+          description: Transaction non trouvée
+        "500":
+          description: Erreur serveur interne
+    put:
+      summary: Modifier les informations d'une transaction
+      description: Permet de modifier certaines informations d'une transaction existante.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la transaction
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                amount:
+                  type: number
+                category:
+                  type: string
+      responses:
+        "200":
+          description: Transaction mise à jour avec succès
+        "400":
+          description: Requête invalide
+        "404":
+          description: Transaction non trouvée
+        "500":
+          description: Erreur serveur interne
+components:
+  schemas:
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "123456"
+        date:
+          type: string
+          format: date-time
+          example: "2024-02-01T12:30:00Z"
+        description:
+          type: string
+          example: "Paiement factures"
+        amount:
+          type: number
+          example: 150.75
+        category:
+          type: string
+          example: "Factures"
+        accountId:
+          type: string
+          example: "987654"

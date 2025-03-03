@@ -31,6 +31,9 @@ function SaginIn(){
             const token = data.body.token
             dispatch(HandelLogin(token))
             dispatch(getProfilData(token))
+        }else{
+            const message = data.message
+            alert(message)
         }
     }
     return(
