@@ -1,6 +1,7 @@
-import Chat from "../composents/homeComposents/chat"
-import Mony from "../composents/homeComposents/mony"
-import Security from "../composents/homeComposents/security"
+import HomeIcons from "../composents/homeIcons"
+import iconChat from "../assets/img/icon-chat.webp"
+import iconMoney from "../assets/img/icon-money.webp"
+import iconSecurity from "../assets/img/icon-security.webp"
 function Home(){
     return(
         <main>
@@ -15,9 +16,11 @@ function Home(){
             </div>
             <section className="features">
                 <h2 className="sr-only">Features</h2>
-                <Chat/>
-                <Mony/>
-                <Security/>
+                <HomeIcons src={iconChat} title='You are our #1 priority' content='Need to talk to a representative? You can get in touch through our
+                24/7 chat or through a phone call in less than 5 minutes.'/>
+                <HomeIcons src={iconMoney} title='More savings means higher rates' content='The more you save with us, the higher your interest rate will be!'/>
+                <HomeIcons src={iconSecurity} title='Security you can trust' content='We use top of the line encryption to make sure your data and money
+                is always safe.'/>
             </section>
         </main>
     )

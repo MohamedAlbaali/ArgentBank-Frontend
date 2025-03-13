@@ -11,6 +11,8 @@ paths:
     get:
       summary: Récupérer toutes les transactions du mois en cours
       description: Retourne la liste des transactions de l'utilisateur pour le mois actuel, groupées par compte.
+      security:
+        - bearerAuth: []
       parameters:
         - name: accountId
           in: query
@@ -29,12 +31,16 @@ paths:
                   $ref: '#/components/schemas/Transaction'
         "401":
           description: Utilisateur non authentifié
+        "403":
+          description: Accès interdit
         "500":
           description: Erreur serveur interne
   /transactions/{id}:
     get:
       summary: Récupérer les détails d'une transaction
       description: Retourne les détails d'une transaction spécifique.
+      security:
+        - bearerAuth: []
       parameters:
         - name: id
           in: path
@@ -49,13 +55,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Transaction'
+        "403":
+          description: Accès interdit
         "404":
           description: Transaction non trouvée
         "500":
           description: Erreur serveur interne
     put:
-      summary: Modifier les informations d'une transaction
-      description: Permet de modifier certaines informations d'une transaction existante.
+      summary: Modifier la catégorie et la note d'une transaction
+      description: Permet de modifier uniquement la catégorie et la note d'une transaction existante.
+      security:
+        - bearerAuth: []
       parameters:
         - name: id
           in: path
@@ -70,22 +80,27 @@ paths:
             schema:
               type: object
               properties:
-                description:
-                  type: string
-                amount:
-                  type: number
                 category:
+                  type: string
+                note:
                   type: string
       responses:
         "200":
           description: Transaction mise à jour avec succès
         "400":
           description: Requête invalide
+        "403":
+          description: Accès interdit
         "404":
           description: Transaction non trouvée
         "500":
           description: Erreur serveur interne
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     Transaction:
       type: object
@@ -106,6 +121,12 @@ components:
         category:
           type: string
           example: "Factures"
+        note:
+          type: string
+          example: "Payé via virement bancaire"
+        transactionType:
+          type: string
+          example: "Dépense"
         accountId:
           type: string
           example: "987654"
